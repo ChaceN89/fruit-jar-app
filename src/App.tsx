@@ -1,5 +1,5 @@
 // import { useFruits } from '@/context/FruitContext'
-import Header from './components/Header'
+import Header from './components/ui-elements/Header'
 import FruitList from './components/LeftSide/AllFruit'
 import FruitSorting from './components/rightSide/FruitSorting'
 
@@ -9,20 +9,10 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen w-full">
-      {/* Header */}
       <Header/>
-
-
       <div className="flex flex-1 overflow-hidden">
-
-
-
-      {/* Main Content */}
-        {/* Left: Fruit List */}
-      <FruitList/>
-
-      <FruitSorting/>
-  
+        <FruitList/>
+        <FruitSorting/>
       </div>
     </div>
   )

@@ -1,3 +1,18 @@
+/**
+ * @file FruitContext.tsx
+ * @module FruitContext
+ * @desc React context for managing fruit data and the fruit jar state in the Fruit Jar App.
+ *
+ * @features
+ * - Fetches fruit data from the external API with API key support.
+ * - Manages global loading and error state for data fetching.
+ * - Tracks user-selected "jar fruits" with add and remove functions. (User can add fruits to a jar and remove them.)
+ * - Provides a typed hook (`useFruits`) for context access.
+ *
+ * @author Chace Nielson
+ * @created Jul 6, 2025
+ * @updated Jul 6, 2025
+ */
 // src/context/FruitContext.tsx
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
@@ -60,11 +75,12 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
 
-  // To append fruits to the jar
+  // Add a fruit to the jar (preserving previous contents)
   const addToJar = (fruit: Fruit) => {
     setJarFruits((prev) => [...prev, fruit])
   }
 
+  // Remove a fruit from the jar by its unique ID
   //to remove a specific fruit from the jar list
   const removeFromJar = (fruitId: number) => {
     setJarFruits((prev) => prev.filter((fruit) => fruit.id !== fruitId))

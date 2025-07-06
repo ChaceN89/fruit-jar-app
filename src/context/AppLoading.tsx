@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import SplashScreen from '@/components/SplashScreen'
+import SplashScreen from '@/components/ui-elements/SplashScreen'
 import { useFruits } from '@/context/FruitContext'
 import App from '@/App'
 
