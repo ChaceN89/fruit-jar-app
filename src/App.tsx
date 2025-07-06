@@ -1,7 +1,7 @@
 // import { useFruits } from '@/context/FruitContext'
 import Header from './components/Header'
-import FruitList from './components/AllFruit'
-import FruitSorting from './components/FruitSorting'
+import FruitList from './components/LeftSide/AllFruit'
+import FruitSorting from './components/rightSide/FruitSorting'
 
 function App() {
   // const { fruits, loading, error } = useFruits()

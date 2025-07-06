@@ -1,6 +1,7 @@
 // src/context/FruitContext.tsx
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
+// Fruit data structure based on the API response
 export interface Fruit {
   id: number
   name: string
@@ -16,8 +17,12 @@ export interface Fruit {
   }
 }
 
+// Context type for other components accessing the context data
 interface FruitContextType {
   fruits: Fruit[]
+  jarFruits: Fruit[]
+  addToJar: (fruit: Fruit) => void
+  removeFromJar: (fruitId: number) => void
   loading: boolean
   error: string | null
 }
@@ -25,14 +30,18 @@ interface FruitContextType {
 const FruitContext = createContext<FruitContextType | undefined>(undefined)
 
 export const FruitProvider = ({ children }: { children: ReactNode }) => {
+  // Getting all fruits from the API
   const [fruits, setFruits] = useState<Fruit[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  // For sorting the frutis in the jar 
+  const [jarFruits, setJarFruits] = useState<Fruit[]>([])
+
   useEffect(() => {
     const fetchFruits = async () => {
       try {
-        const response = await fetch('https://fruity-proxy.vercel.app/api/fruits', {
+        const response = await fetch(import.meta.env.VITE_API_PATH, {
           headers: {
             'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
           },
@@ -50,8 +59,19 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
     fetchFruits()
   }, [])
 
+
+  // To append fruits to the jar
+  const addToJar = (fruit: Fruit) => {
+    setJarFruits((prev) => [...prev, fruit])
+  }
+
+  //to remove a specific fruit from the jar list
+  const removeFromJar = (fruitId: number) => {
+    setJarFruits((prev) => prev.filter((fruit) => fruit.id !== fruitId))
+  }
+
   return (
-    <FruitContext.Provider value={{ fruits, loading, error }}>
+    <FruitContext.Provider value={{ fruits, jarFruits, addToJar, removeFromJar, loading, error }}>
       {children}
     </FruitContext.Provider>
   )
