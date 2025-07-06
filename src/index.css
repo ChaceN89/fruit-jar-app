@@ -1,1 +1,44 @@
 @import "tailwindcss";
+
+
+
+/* Dark mode variant setup */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* === Theme Variables === */
+@theme {
+  --font-title: "Poppins", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+
+  --color-bg: rgb(255, 255, 250);                 /* Light background */
+  --color-fg: rgb(40, 40, 40);                    /* Dark text */
+  --color-accent: rgb(0, 191, 166);               /* Teal accent */
+
+  --color-bg-dark: rgb(22, 22, 22);               /* Dark background */
+  --color-fg-dark: rgb(240, 240, 240);            /* Light text */
+
+  --spacing-header-height: 4rem;
+}
+
+/* Global typography */
+html, body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  height: 100%;
+}
+
+.dark html, .dark body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-fg-dark);
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-family: var(--font-title);
+}
+
+/* Hide scrollbars (optional) */
+body::-webkit-scrollbar {
+  display: none;
+}
