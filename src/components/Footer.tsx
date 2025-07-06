@@ -1,5 +1,5 @@
 
-export default function FruitList() {
+export default function Footer() {
   return (
     <div>
       
