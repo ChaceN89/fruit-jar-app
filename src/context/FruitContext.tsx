@@ -133,18 +133,46 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
       setSortedFruits({ 'All Fruits': data })
 
     } catch (err) {
-      const error = err as Error
 
-      const message = [
-        `❌ Failed to fetch fruit data.`,
-        `Error Message: ${error.message}`,
-        error.stack ? `Stack Trace: ${error.stack.split('\n')[0]}` : null,
-      ]
-        .filter(Boolean)
-        .join('\n')
 
-      console.error('[FruitContext] Fetch Error:', message)
+      let message = '❌ Failed to fetch fruit data.'
+
+      if (err instanceof Response) {
+        // If you ever throw a Response (not common here)
+        const json = await err.json()
+        message += `\nServer Error ${err.status}: ${json?.error || 'Unknown error'}`
+        if (json?.upstreamBody) {
+          message += `\n\nUpstream Response:\n${json.upstreamBody}`
+        }
+      } else if (err instanceof Error) {
+        // Standard fetch error or thrown manually
+        message += `\nError Message: ${err.message}`
+
+        try {
+          // Try to parse backend error JSON (e.g., from res.status >= 400)
+          const res = await fetch('/api/fruits')
+          const json = await res.json()
+          if (json?.error || json?.upstreamBody) {
+            message += `\n\nDetails:\n${json.error || ''}`
+            if (json.upstreamBody) {
+              message += `\n\nUpstream Response:\n${json.upstreamBody}`
+            }
+          }
+        } catch (_) {
+          // Fallback — can't parse JSON
+        }
+
+        if (err.stack) {
+          message += `\nStack Trace: ${err.stack.split('\n')[0]}`
+        }
+      } else {
+        // Unknown error type
+        message += `\nAn unknown error occurred.`
+      }
+
       setError(message)
+
+
     } finally {
       // Loading is complete regardless of success or failure
       setLoading(false)

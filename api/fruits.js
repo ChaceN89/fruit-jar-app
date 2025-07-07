@@ -1,18 +1,17 @@
 export default async function handler(req, res) {
-  console.log('➡️  Incoming request to /api/fruits')
-  console.log('➡️  Method:', req.method)
-  console.log('➡️  Request Headers:', req.headers)
-
   const FRUITS_API_PATH = process.env.FRUITS_API_PATH
   const FRUITS_API_KEY = process.env.FRUITS_API_KEY
 
-  console.log('🔐 Environment Variables:')
-  console.log('   FRUITS_API_PATH:', FRUITS_API_PATH)
-  console.log('   FRUITS_API_KEY:', FRUITS_API_KEY ? '[REDACTED]' : '❌ UNDEFINED')
-
   if (!FRUITS_API_PATH || !FRUITS_API_KEY) {
-    console.error('❌ Missing API path or key. Check Vercel environment variables.')
-    return res.status(500).json({ error: 'Missing FRUITS_API_PATH or FRUITS_API_KEY' })
+    return res.status(500).json({
+      ok: false,
+      status: 500,
+      error: 'Missing environment variables',
+      details: {
+        FRUITS_API_PATH: FRUITS_API_PATH ?? '❌ undefined',
+        FRUITS_API_KEY: FRUITS_API_KEY ? '[REDACTED]' : '❌ undefined',
+      },
+    })
   }
 
   try {
@@ -20,33 +19,41 @@ export default async function handler(req, res) {
       'x-api-key': FRUITS_API_KEY,
     }
 
-    console.log('➡️  Fetching from upstream API:', FRUITS_API_PATH)
-    console.log('➡️  Using headers:', upstreamHeaders)
-
     const response = await fetch(FRUITS_API_PATH, {
       method: 'GET',
       headers: upstreamHeaders,
     })
 
-    console.log('✅ Upstream response status:', response.status)
-
     const rawBody = await response.text()
 
-    console.log('📦 Raw response body:', rawBody.slice(0, 500)) // only log first 500 chars
+    // If the upstream failed, pass back as detailed error
+    if (!response.ok) {
+      return res.status(response.status).json({
+        ok: false,
+        status: response.status,
+        error: 'Upstream API error',
+        upstreamBody: rawBody,
+        upstreamStatus: response.status,
+        upstreamHeaders: Object.fromEntries(response.headers.entries()),
+        requestHeaders: upstreamHeaders,
+        targetUrl: FRUITS_API_PATH,
+      })
+    }
 
-    // Forward status and raw content as JSON
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.status(response.status).json({
-      ok: response.ok,
-      status: response.status,
-      body: rawBody,
-    })
+    // Success case
+    const data = JSON.parse(rawBody)
+    res.status(200).json(data)
   } catch (err) {
-    console.error('❌ Proxy request failed:', err)
     res.status(500).json({
-      error: 'Proxy failed',
+      ok: false,
+      status: 500,
+      error: 'Proxy request failed',
       message: err.message,
       stack: err.stack,
+      meta: {
+        FRUITS_API_PATH,
+        FRUITS_API_KEY: FRUITS_API_KEY ? '[REDACTED]' : '❌ undefined',
+      },
     })
   }
 }
