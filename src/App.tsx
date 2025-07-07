@@ -1,21 +1,20 @@
-// import { useFruits } from '@/context/FruitContext'
 import Header from './components/ui-elements/Header'
 import FruitList from './components/LeftSide/AllFruit'
-import FruitSorting from './components/rightSide/FruitSorting'
+import FruitDisplay from './components/rightSide/FruitDisplay'
+import Footer from './components/ui-elements/Footer'
 
-function App() {
-  // const { fruits, loading, error } = useFruits()
-
-
+export default function App() {
   return (
+    <>
     <div className="flex flex-col h-screen w-full">
       <Header/>
       <div className="flex flex-1 overflow-hidden">
         <FruitList/>
-        <FruitSorting/>
+        <FruitDisplay/>
       </div>
     </div>
+      <Footer/>
+    </>
   )
 }
 
-export default App

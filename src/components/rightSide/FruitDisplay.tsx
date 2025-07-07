@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import ToggleSwitch from '../ui-elements/ToggleSwitch'
+import { useFruits } from '@/context/FruitContext'
 
-export default function FruitSorting() {
+export default function FruitDisplay() {
     const [view, setView] = useState<'List' | 'Table'>('List')
+
+    const { jarFruits } = useFruits()
+
 
   return (
     <div className="p-4 w-full">
@@ -18,6 +22,8 @@ export default function FruitSorting() {
       <div className="mt-4">
         {view === 'List' ? <div>📋 Showing List View</div> : <div>📊 Showing Table View</div>}
       </div>
+
+      {JSON.stringify(jarFruits)}
     </div>
   )
 }

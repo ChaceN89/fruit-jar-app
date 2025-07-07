@@ -2,6 +2,7 @@
 
 
 
+
 /* Dark mode variant setup */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -10,33 +11,25 @@
   --font-title: "Poppins", sans-serif;
   --font-body: "Montserrat", sans-serif;
 
-  --color-bg: rgb(255, 255, 250);                 /* Light background */
-  --color-fg: rgb(40, 40, 40);                    /* Dark text */
-  --color-accent: rgb(0, 191, 166);               /* Teal accent */
+  --color-primary: rgb(255, 245, 250);
+  --color-primary-alt: rgb(235, 245, 255); 
 
-  --color-bg-dark: rgb(22, 22, 22);               /* Dark background */
-  --color-fg-dark: rgb(240, 240, 240);            /* Light text */
+  --color-secondary: rgb(35, 31, 31);  
+  --color-secondary-alt: rgb(17, 17, 17);     
 
-  --spacing-header-height: 4rem;
+  --color-accent: rgb(0, 191, 166);    
+  --color-accent-alt: rgb(102, 211, 194);  
 }
 
 /* Global typography */
 html, body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
-  color: var(--color-fg);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
   height: 100%;
 }
 
-.dark html, .dark body {
-  background-color: var(--color-bg-dark);
-  color: var(--color-fg-dark);
-}
 
-/* Headings */
-h1, h2, h3 {
-  font-family: var(--font-title);
-}
 
 /* Hide scrollbars (optional) */
 body::-webkit-scrollbar {
@@ -44,7 +37,7 @@ body::-webkit-scrollbar {
 }
 
 
-/* Loading Dits */
+/* Loading Dots */
 @keyframes loadingDots {
   0%   { content: " ."; }
   33%  { content: " .."; }

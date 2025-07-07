@@ -15,7 +15,7 @@ import DarkModeButton from './DarkModeButton'
 export default function Header(): JSX.Element {
   return (
     <header
-      className={`
+      className='
         w-full 
         h-16 
         flex items-center 
@@ -25,14 +25,14 @@ export default function Header(): JSX.Element {
         bg-accent dark:bg-secondary 
         text-white dark:text-primary
         font-title
-        z-10
-      `}
+        z-10 overflow-hidden
+      '
     >
-      <div className="w-1/3" />
-      <div className="w-1/3 text-center text-lg sm:text-xl font-semibold">
-        🍓 Fruit Jar App
+      <div className="md:w-1/3" />
+      <div className="md:w-1/3 text-center text-lg sm:text-xl font-semibold">
+        🍓 Fruit Jar Sorting
       </div>
-      <div className="w-1/3 flex justify-end items-center">
+      <div className="md:w-1/3 flex justify-end items-center">
         <DarkModeButton />
       </div>
     </header>
