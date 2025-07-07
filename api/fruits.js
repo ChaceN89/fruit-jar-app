@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
-  const response = await fetch(process.env.VITE_FRUIT_API_PATH, {
+  const response = await fetch(process.env.FRUIT_API_PATH, {
     headers: {
-      'x-api-key': process.env.VITE_FRUIT_API_KEY,
+      'x-api-key': process.env.FRUIT_API_KEY,
     },
   })
 
