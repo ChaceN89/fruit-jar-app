@@ -119,7 +119,7 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
         headers: {
           'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
         },
-      })
+      }) 
 
       // const response = await fetch('/api/fruits', {
       //   headers: {
