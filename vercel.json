@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/fruits.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
-}
