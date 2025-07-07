@@ -132,9 +132,19 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
       setFruits(data)
       setSortedFruits({ 'All Fruits': data })
 
-    } catch (err) { 
-      // Set an error message if the fetch fails
-      setError((err as Error).message)
+    } catch (err) {
+      const error = err as Error
+
+      const message = [
+        `❌ Failed to fetch fruit data.`,
+        `Error Message: ${error.message}`,
+        error.stack ? `Stack Trace: ${error.stack.split('\n')[0]}` : null,
+      ]
+        .filter(Boolean)
+        .join('\n')
+
+      console.error('[FruitContext] Fetch Error:', message)
+      setError(message)
     } finally {
       // Loading is complete regardless of success or failure
       setLoading(false)
