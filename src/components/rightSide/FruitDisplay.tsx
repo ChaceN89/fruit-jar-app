@@ -3,10 +3,11 @@ import ToggleSwitch from '../ui-elements/ToggleSwitch'
 import { useFruits } from '@/context/FruitContext'
 import FruitPieChart from './FruitPieChart'
 import FruitJar from './FruitJar'
+import SelectedFruit from './SelectedFruit'
 
 export default function FruitDisplay() {
   const [view, setView] = useState<'Jar' | 'Pie'>('Jar')
-  const { jarFruits, emptyJar } = useFruits()
+  const { emptyJar } = useFruits()
 
   return (
     <div className="p-4 w-full overflow-y-auto">
@@ -37,10 +38,12 @@ export default function FruitDisplay() {
         ) : (
           <>
             <h3 className="font-semibold">Calorie Breakdown 🥧</h3>
-            <FruitPieChart fruits={jarFruits} />
+            <FruitPieChart/>
           </>
         )}
       </div>
+
+      <SelectedFruit/>
 
     </div>
   )

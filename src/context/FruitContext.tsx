@@ -49,6 +49,8 @@ interface FruitContextType {
   addToJar: (fruit: Fruit) => void
   removeFromJar: (fruit: Fruit) => void
   emptyJar: () => void
+  selectedFruit: Fruit | null
+  setSelectedFruit: (fruit: Fruit | null) => void
   loading: boolean
   error: string | null
 }
@@ -58,8 +60,15 @@ const FruitContext = createContext<FruitContextType | undefined>(undefined)
 
 // Provider component to wrap the app and provide fruit data
 export const FruitProvider = ({ children }: { children: ReactNode }) => {
+
+  // Fruits fetched from the API
   const [fruits, setFruits] = useState<Fruit[]>([])
+
+  // Fruits added to the jar by the user
   const [jarFruits, setJarFruits] = useState<Fruit[]>([])
+
+  // Single selected fruit when a user clicks on a fruit in the table
+  const [selectedFruit, setSelectedFruit] = useState<Fruit | null>(null)
   
   // Sorting Options for the main list of fruit - a record of fruits that will be used for sorting
   const [sortOption, setSortOption] = useState<SortOption>('None')
@@ -160,6 +169,8 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
         addToJar,
         removeFromJar,
         emptyJar,
+        selectedFruit,
+        setSelectedFruit,
         loading,
         error,
       }}

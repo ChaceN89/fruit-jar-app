@@ -8,18 +8,45 @@
  * @updated Jul 6, 2025
  */
 
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import type { Fruit } from '@/context/FruitContext'
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Sector } from 'recharts'
+import { useFruits, type Fruit } from '@/context/FruitContext'
 
 // Optional: Define some colors
 const COLORS = ['#34a0a4', '#52b788', '#ffba08', '#f15bb5', '#f48c06', '#ef476f', '#6a4c93']
 
-interface Props {
-  fruits: Fruit[]
-}
 
-export default function FruitPieChart({ fruits }: Props) {
-  const data = fruits.reduce<Record<string, number>>((acc, fruit) => {
+
+export default function FruitPieChart() {
+
+
+  const { jarFruits, setSelectedFruit } = useFruits()
+
+  // Function to render the active shape of the pie chart - for hover animation
+  const renderActiveShape = (props: any) => {
+    const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill, payload } = props;
+
+    const fullFruit = jarFruits.find(f => f.name === payload.name);
+    setSelectedFruit(fullFruit ?? null);
+
+    return (
+      <g>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius + 10}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill={fill}
+          style={{ outline: 'none' }}
+          tabIndex={-1}
+          focusable={false}
+        />
+      </g>
+    );
+  };
+
+  const data = jarFruits.reduce<Record<string, number>>((acc, fruit) => {
     const name = fruit.name
     const calories = fruit.nutritions.calories
     acc[name] = (acc[name] || 0) + calories
@@ -36,7 +63,7 @@ export default function FruitPieChart({ fruits }: Props) {
   }
 
   return (
-    <div className="w-full h-[700px]">
+    <div className="w-full h-[700px] mb-10">
       Total Calories in Jar: {chartData.reduce((sum, item) => sum + item.calories, 0)}
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
@@ -47,20 +74,24 @@ export default function FruitPieChart({ fruits }: Props) {
             cx="50%"
             cy="50%"
             outerRadius={200}
-            labelLine={false}
             label={({ name, calories }: any) => {
-              const total = fruits.reduce((sum, f) => sum + f.nutritions.calories, 0)
+              const total = jarFruits.reduce((sum, f) => sum + f.nutritions.calories, 0)
               const percentage = (calories / total) * 100
               return percentage > 2 ? `${name} (${calories} cal)` : '' // only return label if percentage is greater than 2%
-            }}          
+            }} 
+            labelLine={false}   
+            activeShape={renderActiveShape}
+            isAnimationActive={false} // Optional: disable animation if you want full control
+            focusable={false}         // Prevent keyboard/mouse focus
+            tabIndex={-1}             // Prevent browser focus ring
           >
             {chartData.map((_, index) => (
               <Cell 
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]} 
-                style={{
-                  outline: "none"
-                }}
+                style={{ outline: 'none' }}
+                tabIndex={-1}
+                focusable={false}
               />
             ))}
           </Pie>

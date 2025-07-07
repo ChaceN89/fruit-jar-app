@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
     <header
       className='
         w-full 
-        h-16 
+        h-10
         flex items-center 
         justify-between 
         px-4 
