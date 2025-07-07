@@ -115,20 +115,20 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
   const fetchFruits = async () => {
     try {
 
-      let response: Response
+      // let response: Response
 
-      if (import.meta.env.MODE === 'development') {
-        // Local dev: use real API directly
-        response = await fetch(import.meta.env.VITE_API_PATH, {
-          headers: {
-            'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
-          },
-        })
-      } else {
-        // Production: call proxy route
-        response = await fetch('/api/fruits')
-      }
-
+      // if (import.meta.env.MODE === 'development') {
+      //   // Local dev: use real API directly
+      //   response = await fetch(import.meta.env.VITE_API_PATH, {
+      //     headers: {
+      //       'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
+      //     },
+      //   })
+      // } else {
+      //   // Production: call proxy route
+      // }
+      
+      const response = await fetch('/api/fruits')
 
       if (!response.ok) throw new Error(`Error: ${response.status}`)
       const data: Fruit[] = await response.json()
