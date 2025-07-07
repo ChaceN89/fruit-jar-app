@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/fruits.js": {
+      "runtime": "vercel-node@18"
+    }
+  }
+}

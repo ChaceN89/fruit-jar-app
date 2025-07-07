@@ -1,6 +1,4 @@
-// api/fruits.ts
-import  { VercelRequest, VercelResponse } from '@vercel/node'
-
+// api/fruits.js
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 module.exports = async function handler(req, res) {
