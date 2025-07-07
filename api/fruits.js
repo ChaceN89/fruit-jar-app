@@ -17,6 +17,7 @@ export default async function handler(req, res) {
   try {
     const upstreamHeaders = {
       'x-api-key': FRUITS_API_KEY,
+      'user-agent': 'LocalDevBot/1.0',
     }
 
     const response = await fetch(FRUITS_API_PATH, {
