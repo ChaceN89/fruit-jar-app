@@ -9,7 +9,7 @@
  */
 
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Sector } from 'recharts'
-import { useFruits, type Fruit } from '@/context/FruitContext'
+import { useFruits  } from '@/context/FruitContext'
 
 // Optional: Define some colors
 const COLORS = ['#34a0a4', '#52b788', '#ffba08', '#f15bb5', '#f48c06', '#ef476f', '#6a4c93']
