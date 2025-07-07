@@ -9,7 +9,6 @@
  * @updated Jul 6, 2025
  */
 
-// api/fruits.ts
 export const config = {
   runtime: 'edge',
 }
@@ -27,6 +26,11 @@ export default async function handler(req: Request) {
       },
     })
 
+    if (!upstream.ok) {
+      const text = await upstream.text()
+      return new Response(JSON.stringify({ error: 'Upstream failed', status: upstream.status, text }), { status: 500 })
+    }
+
     const data = await upstream.json()
 
     return new Response(JSON.stringify(data), {
@@ -39,6 +43,6 @@ export default async function handler(req: Request) {
       },
     })
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message || 'Unknown server error' }), { status: 500 })
+    return new Response(JSON.stringify({ error: err.message || 'Unknown error' }), { status: 500 })
   }
 }
