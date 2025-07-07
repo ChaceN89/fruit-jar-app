@@ -9,34 +9,36 @@
  * @updated Jul 6, 2025
  */
 
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+// api/fruits.ts
+export const config = {
+  runtime: 'edge',
+}
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: Request) {
+  const apiPath = process.env.FRUITS_API_PATH
+  if (!apiPath) {
+    return new Response(JSON.stringify({ error: 'FRUITS_API_PATH not set' }), { status: 500 })
+  }
+
   try {
-    const apiPath = process.env.FRUITS_API_PATH
-    if (!apiPath) {
-      return res.status(500).json({ error: 'VITE_API_PATH environment variable is not set.' })
-    }
-    const response = await fetch(apiPath, {
+    const upstream = await fetch(apiPath, {
       headers: {
         'x-api-key': process.env.FRUIT_API_KEY!,
       },
     })
 
-    if (!response.ok) {
-      return res.status(response.status).json({ error: `Upstream error: ${response.statusText}` })
-    }
+    const data = await upstream.json()
 
-    const data = await response.json()
-
-    // Allow frontend to access this response
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'GET')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-
-    return res.status(200).json(data)
-
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    })
   } catch (err: any) {
-    return res.status(500).json({ error: err.message || 'Unknown server error' })
+    return new Response(JSON.stringify({ error: err.message || 'Unknown server error' }), { status: 500 })
   }
 }
