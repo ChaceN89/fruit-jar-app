@@ -48,6 +48,7 @@ interface FruitContextType {
   jarFruits: Fruit[]
   addToJar: (fruit: Fruit) => void
   removeFromJar: (fruit: Fruit) => void
+  emptyJar: () => void
   loading: boolean
   error: string | null
 }
@@ -142,6 +143,10 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
+  const emptyJar = () => {
+    setJarFruits([])
+  }
+
 
 
   return (
@@ -154,6 +159,7 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
         jarFruits,
         addToJar,
         removeFromJar,
+        emptyJar,
         loading,
         error,
       }}
