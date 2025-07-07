@@ -48,10 +48,20 @@ export default function FruitPieChart({ fruits }: Props) {
             cy="50%"
             outerRadius={200}
             labelLine={false}
-            label={({ name, calories }: any) => `${name} (${calories} cal)`}
+            label={({ name, calories }: any) => {
+              const total = fruits.reduce((sum, f) => sum + f.nutritions.calories, 0)
+              const percentage = (calories / total) * 100
+              return percentage > 2 ? `${name} (${calories} cal)` : '' // only return label if percentage is greater than 2%
+            }}          
           >
             {chartData.map((_, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell 
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]} 
+                style={{
+                  outline: "none"
+                }}
+              />
             ))}
           </Pie>
           <Tooltip />
