@@ -114,11 +114,12 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
   // Function to fetch fruits from the API
   const fetchFruits = async () => {
     try {
-      const response = await fetch(import.meta.env.VITE_API_PATH, {
-        headers: {
-          'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
-        },
-      })
+      // const response = await fetch(import.meta.env.VITE_API_PATH, {
+      //   headers: {
+      //     'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
+      //   },
+      // })
+      const response = await fetch('/api/fruits')
       if (!response.ok) throw new Error(`Error: ${response.status}`)
       const data: Fruit[] = await response.json()
       
