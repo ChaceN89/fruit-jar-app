@@ -14,7 +14,7 @@ export default function AllFruit() {
     <div className="w-full md:w-3/5 p-4 border-r border-gray-200 flex flex-col max-h-[calc(100vh-4rem)]"> {/* 4rem = 64px = your Header height */}
       {/* Header & View Mode Toggle */}
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="text-lg font-medium">Fruit List</h2>
+        <h2 className="text-lg font-bold">Fruits</h2>
         <ToggleSwitch
           options={['List', 'Table']}
           selected={viewMode}
@@ -23,7 +23,8 @@ export default function AllFruit() {
       </div>
 
       {/* Sorting Control */}
-      <FruitSorting />
+      <FruitSorting numOfFruits={fruits.length} />
+
 
       {/* Status & Scrollable List/Table */}
       {loading ? (
@@ -32,7 +33,6 @@ export default function AllFruit() {
         <p className="text-red-500">{error}</p>
       ) : (
         <>
-          <p className="text-sm text-gray-600 mb-2">{fruits.length} fruits loaded ✅</p>
           <div className="overflow-y-auto flex-1 pr-1">
             {viewMode === 'List' ? <FruitList /> : <FruitTable />}
           </div>

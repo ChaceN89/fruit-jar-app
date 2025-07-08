@@ -110,68 +110,32 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
     }, {} as Record<string, Fruit[]>)
   }
 
-
   // Function to fetch fruits from the API
   const fetchFruits = async () => {
     try {
 
-      // DEV VERSION
-      // const response = await fetch(import.meta.env.VITE_FRUITS_API_PATH, {
+      // Fetch the fruit data from the API using the provided URL and API key
+      // const response = await fetch("https://fruity-proxy.vercel.app/api/fruits", {
       //   headers: {
-      //     'x-api-key': import.meta.env.VITE_FRUIT_API_KEY,
-      //   },
-      // }) 
+      //     'x-api-key': "fruit-api-challenge-2025",
+      //   }
+      // })
 
-      // PROD VERSION
-      const response = await fetch('/api/fruits')
+      // Downloaded file
+      const response = await fetch("/fruit-data.json")
 
+
+      // Check if the response is ok
       if (!response.ok) throw new Error(`Error: ${response.status}`)
       const data: Fruit[] = await response.json()
       
+
       // Set the fruits list - all the fruits and the list that will be used for sorting to display a subset of the fruits
       setFruits(data)
       setSortedFruits({ 'All Fruits': data })
 
     } catch (err) {
-
-
-      let message = '❌ Failed to fetch fruit data.'
-
-      if (err instanceof Response) {
-        // If you ever throw a Response (not common here)
-        const json = await err.json()
-        message += `\nServer Error ${err.status}: ${json?.error || 'Unknown error'}`
-        if (json?.upstreamBody) {
-          message += `\n\nUpstream Response:\n${json.upstreamBody}`
-        }
-      } else if (err instanceof Error) {
-        // Standard fetch error or thrown manually
-        message += `\nError Message: ${err.message}`
-
-        try {
-          // Try to parse backend error JSON (e.g., from res.status >= 400)
-          const res = await fetch('/api/fruits')
-          const json = await res.json()
-          if (json?.error || json?.upstreamBody) {
-            message += `\n\nDetails:\n${json.error || ''}`
-            if (json.upstreamBody) {
-              message += `\n\nUpstream Response:\n${json.upstreamBody}`
-            }
-          }
-        } catch (_) {
-          // Fallback — can't parse JSON
-        }
-
-        if (err.stack) {
-          message += `\nStack Trace: ${err.stack.split('\n')[0]}`
-        }
-      } else {
-        // Unknown error type
-        message += `\nAn unknown error occurred.`
-      }
-
-      setError(message)
-
+      setError("❌ Failed to fetch fruit data.")
 
     } finally {
       // Loading is complete regardless of success or failure

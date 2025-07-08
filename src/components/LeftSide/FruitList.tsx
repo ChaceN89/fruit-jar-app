@@ -31,9 +31,10 @@ export default function FruitList() {
   return (
     <div className="mt-4 space-y-4">
       <div className="flex justify-end mb-2">
+
         <button
           onClick={toggleAll}
-          className="btn-sm bg-blue-500 text-white px-3 py-1 rounded"
+          className="btn-blue"
         >
           {allGroupsOpen ? 'Collapse All' : 'Expand All'}
         </button>
@@ -44,15 +45,21 @@ export default function FruitList() {
 
         return (
           <div key={groupName}>
-            <div className="flex justify-between items-center bg-gray-200 px-2 py-1 rounded">
-              <button onClick={() => toggleGroup(groupName)} className="font-bold">
+            <div 
+              onClick={() => toggleGroup(groupName)} 
+              className=" group cursor-pointer flex justify-between items-center bg-gray-200 px-2 py-1 rounded transition-all duration-200 hover:bg-gray-300 bor"
+            >
+              <div className="font-bold text-sm transition-transform duration-200 group-hover:font-bold group-hover:text-base">
                 {groupName}
-              </button>
+              </div>
               <button
-                onClick={() => fruits.forEach(addToJar)}
-                className="btn-sm bg-green-500 text-white px-2 py-1 rounded"
+                onClick={(e) => {
+                  e.stopPropagation() // Prevents toggling group when clicking "Add Group"
+                  fruits.forEach(addToJar)
+                }}
+                className="btn"
               >
-                Add Group
+                Add Group to Jar
               </button>
             </div>
 
@@ -61,7 +68,7 @@ export default function FruitList() {
                 {fruits.map((fruit, index) => (
                   <li key={`${fruit.id}-${index}`} className="flex justify-between border p-2">
                     <span>{fruit.name} ({fruit.nutritions.calories} cal)</span>
-                    <button onClick={() => addToJar(fruit)} className="btn">Add</button>
+                    <button onClick={() => addToJar(fruit)} className="btn">Add to jar</button>
                   </li>
                 ))}
               </ul>
@@ -69,6 +76,9 @@ export default function FruitList() {
           </div>
         )
       })}
+
+
+
     </div>
   )
 }

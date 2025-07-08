@@ -50,3 +50,16 @@ body::-webkit-scrollbar {
   animation: loadingDots 1.2s infinite steps(1);
   white-space: pre; /* ensures spacing is preserved */
 }
+
+
+.btn{
+  @apply bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 hover:cursor-pointer;
+}
+
+.btn-teal{
+ @apply bg-teal-500 text-white px-3 py-1 rounded hover:bg-teal-600 hover:cursor-pointer;
+}
+
+.btn-blue{
+  @apply bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 hover:cursor-pointer;
+}

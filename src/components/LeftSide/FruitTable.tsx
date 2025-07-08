@@ -5,24 +5,32 @@ export default function FruitTable() {
   const { sortedFruits, addToJar } = useFruits()
 
   return (
-    <div className="mt-4 w-full border border-gray-200">
+    <div className="mt-4 w-full border border-gray-200 rounded overflow-hidden">
       {Object.entries(sortedFruits).map(([groupName, fruits]) => {
         const [open, setOpen] = useState(true)
 
         return (
-          <div key={groupName} className="mb-4">
-            <div className="flex justify-between items-center bg-gray-100 px-4 py-2">
-              <button onClick={() => setOpen(!open)} className="font-semibold text-lg">
+          <div key={groupName} className="mb-4 border-b">
+            {/* Group Header with Hover Effects */}
+            <div
+              onClick={() => setOpen(!open)}
+              className="group cursor-pointer flex justify-between items-center bg-gray-300 hover:bg-gray-200 px-4 py-2 transition-all duration-200"
+            >
+              <div className="font-semibold text-base transition-transform duration-200 group-hover:scale-[1.05] group-hover:text-lg">
                 {groupName}
-              </button>
+              </div>
               <button
-                className="btn-sm bg-green-500 text-white px-2 py-1 rounded"
-                onClick={() => fruits.forEach(addToJar)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  fruits.forEach(addToJar)
+                }}
+                className="btn"
               >
-                Add Group
+                Add Group to Jar
               </button>
             </div>
 
+            {/* Table Content */}
             {open && (
               <table className="w-full text-left border-t border-gray-300">
                 <thead className="bg-gray-50">
@@ -37,7 +45,10 @@ export default function FruitTable() {
                 </thead>
                 <tbody>
                   {fruits.map((fruit, index) => (
-                    <tr key={`${fruit.id}-${index}`} className="border-t">
+                    <tr
+                      key={`${fruit.id}-${index}`}
+                      className="border-t even:bg-white odd:bg-gray-50 hover:bg-blue-50 transition"
+                    >
                       <td className="p-2">{fruit.name}</td>
                       <td className="p-2">{fruit.family}</td>
                       <td className="p-2">{fruit.order}</td>
@@ -45,10 +56,10 @@ export default function FruitTable() {
                       <td className="p-2">{fruit.nutritions.calories}</td>
                       <td className="p-2">
                         <button
-                          className="px-3 py-1 bg-teal-500 text-white rounded hover:bg-teal-600 transition"
+                          className="btn-teal"
                           onClick={() => addToJar(fruit)}
                         >
-                          Add
+                          Add to Jar
                         </button>
                       </td>
                     </tr>
