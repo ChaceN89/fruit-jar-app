@@ -25,7 +25,6 @@ export default function AllFruit() {
       {/* Sorting Control */}
       <FruitSorting numOfFruits={fruits.length} />
 
-
       {/* Status & Scrollable List/Table */}
       {loading ? (
         <p>Loading...</p>
@@ -33,7 +32,7 @@ export default function AllFruit() {
         <p className="text-red-500">{error}</p>
       ) : (
         <>
-          <div className="overflow-y-auto flex-1 pr-1">
+          <div className="overflow-y-auto flex-1 pr-1 max-h-96 sm:max-h-screen min-w-md rounded border-2 border-black dark:border-white px-1">
             {viewMode === 'List' ? <FruitList /> : <FruitTable />}
           </div>
         </>

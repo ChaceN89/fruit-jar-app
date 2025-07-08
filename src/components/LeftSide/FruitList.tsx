@@ -44,7 +44,7 @@ export default function FruitList() {
         const isOpen = openGroups[groupName] ?? true
 
         return (
-          <div key={groupName} className='border-2 border-black dark:border-white rounded-lg p-0.5 bg-gray-50 dark:bg-zinc-800'>
+          <div key={groupName} className='border-2 border-black dark:border-white rounded-lg p-0.5  bg-gray-50 dark:bg-zinc-800 mb-2'>
             <div 
               onClick={() => toggleGroup(groupName)} 
               className=" group cursor-pointer flex justify-between items-center bg-gray-200 px-2 py-1 rounded transition-all duration-200 hover:bg-gray-300 "
@@ -76,9 +76,6 @@ export default function FruitList() {
           </div>
         )
       })}
-
-
-
     </div>
   )
 }

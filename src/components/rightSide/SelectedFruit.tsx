@@ -6,8 +6,10 @@ export default function SelectedFruit() {
 
   if (!selectedFruit) {
     return (
-      <div className="text-gray-500 italic mt-4 text-center">
-        No fruit selected (hover on a fruit to see details)
+      <div className="mt-6 bg-white dark:bg-zinc-800 border-2 brder-zinc-800 dark:border-white  rounded-lg p-5 w-full mx-auto text-sm flex flex-col items-center text-center shadow-sm dark:shadow-white">
+        <div className="text-gray-500 italic text-center">
+          No fruit selected (hover on a fruit to see details)
+        </div>
       </div>
     )
   }
@@ -16,21 +18,21 @@ export default function SelectedFruit() {
   const iconPath = getFruitIconPath(name)
 
   return (
-    <div className="mt-6 bg-white dark:bg-zinc-800 border-2 brder-zinc-800 dark:border-white  rounded-lg p-5 w-full mx-auto text-sm flex flex-col items-center text-center shadow-md dark:shadow-white">
+    <div className="mt-6 bg-white dark:bg-zinc-800 border-2 brder-zinc-800 dark:border-white  rounded-lg p-5 w-full mx-auto text-sm flex flex-col items-center text-center shadow-sm dark:shadow-white">
       {/* Header */}
-      <div className="flex flex-col items-center gap-2 mb-4">
+      <div className="flex flex-row xl:flex-col items-center gap-2 mb-4">
         <h2 className="text-2xl font-semibold dark:text-white">{name}</h2>
         {iconPath && (
           <img
             src={iconPath}
             alt={name}
-            className="w-14 h-14 object-contain"
+            className="w-10 h-10 xl:w-14 xl:h-14 object-contain"
           />
         )}
       </div>
 
       {/* Details */}
-      <div className="space-y-1 text-zinc-700 dark:text-zinc-100 text-left">
+      <div className="space-y-1 text-zinc-700 dark:text-zinc-100 text-left flex flex-wrap xl:flex-col justify-start gap-2 w-full">
         <p><strong>Family:</strong> {family}</p>
         <p><strong>Order:</strong> {order}</p>
         <p><strong>Genus:</strong> {genus}</p>

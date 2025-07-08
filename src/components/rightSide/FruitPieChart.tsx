@@ -8,16 +8,14 @@
  * @updated Jul 6, 2025
  */
 
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, Sector } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Sector } from 'recharts'
 import { useFruits  } from '@/context/FruitContext'
 
 // Optional: Define some colors
 const COLORS = ['#34a0a4', '#52b788', '#ffba08', '#f15bb5', '#f48c06', '#ef476f', '#6a4c93']
 
 
-
 export default function FruitPieChart() {
-
 
   const { jarFruits, setSelectedFruit } = useFruits()
 
@@ -63,7 +61,7 @@ export default function FruitPieChart() {
   }
 
   return (
-    <div className="w-full h-[700px] mb-10">
+    <div className="w-full h-[500px] mb-10">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -72,7 +70,8 @@ export default function FruitPieChart() {
             nameKey="name"
             cx="50%"
             cy="50%"
-            outerRadius={200}
+            strokeWidth={0.5}  
+            outerRadius={170}
             label={({ name, calories }: any) => {
               const total = jarFruits.reduce((sum, f) => sum + f.nutritions.calories, 0)
               const percentage = (calories / total) * 100
@@ -80,7 +79,7 @@ export default function FruitPieChart() {
             }} 
             labelLine={false}   
             activeShape={renderActiveShape}
-            isAnimationActive={false} // Optional: disable animation if you want full control
+            isAnimationActive={false} // looks good if true, but hides labels  
             focusable={false}         // Prevent keyboard/mouse focus
             tabIndex={-1}             // Prevent browser focus ring
           >
@@ -95,7 +94,6 @@ export default function FruitPieChart() {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
         </PieChart>
       </ResponsiveContainer>
     </div>
