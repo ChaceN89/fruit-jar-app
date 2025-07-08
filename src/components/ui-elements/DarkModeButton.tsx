@@ -47,7 +47,7 @@ export default function DarkModeButton(): JSX.Element {
       <button
         onClick={toggleDarkMode}
         className={`
-          text-xl p-2 rounded-full 
+          text-xl p-2 rounded-full hover:cursor-pointer
           hover:bg-secondary/50 dark:hover:bg-primary/50
           transition-colors
         `}

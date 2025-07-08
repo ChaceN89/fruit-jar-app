@@ -14,7 +14,7 @@ export default function AllFruit() {
     <div className="w-full md:w-3/5 p-4 border-r border-gray-200 flex flex-col max-h-[calc(100vh-4rem)]"> {/* 4rem = 64px = your Header height */}
       {/* Header & View Mode Toggle */}
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="text-lg font-bold">Fruits</h2>
+        <h2 className="text-lg font-bold dark:text-white">Fruits</h2>
         <ToggleSwitch
           options={['List', 'Table']}
           selected={viewMode}

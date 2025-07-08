@@ -59,12 +59,11 @@ export default function FruitPieChart() {
   }))
 
   if (chartData.length === 0) {
-    return <p className="text-gray-500 italic mt-4">No fruits in jar to display 🍓</p>
+    return <p className="text-gray-500 italic mt-4">No fruits to display</p>
   }
 
   return (
     <div className="w-full h-[700px] mb-10">
-      Total Calories in Jar: {chartData.reduce((sum, item) => sum + item.calories, 0)}
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie

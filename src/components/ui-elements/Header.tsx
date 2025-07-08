@@ -22,15 +22,15 @@ export default function Header(): JSX.Element {
         justify-between 
         px-4 
         shadow-md 
-        bg-accent dark:bg-secondary 
-        text-white dark:text-primary
+        bg-accent
+        text-white
         font-title
         z-10 overflow-hidden
       '
     >
       <div className="md:w-1/3" />
       <div className="md:w-1/3 text-center text-lg sm:text-xl font-semibold">
-        🍓 Fruit Jar Sorting
+        Fruit Jar Sorting
       </div>
       <div className="md:w-1/3 flex justify-end items-center">
         <DarkModeButton />
