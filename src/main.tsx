@@ -4,8 +4,8 @@
  * @desc Entry point of the Fruit Jar App. Initializes the React app and wraps it in the FruitProvider context.
  *
  * @author Chace Nielson
- * @created Jul 6, 2025
- * @updated Jul 6, 2025
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
  */
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

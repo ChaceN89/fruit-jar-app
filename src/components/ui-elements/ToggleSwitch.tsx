@@ -1,3 +1,18 @@
+/**
+ * @file ToggleSwitch.tsx
+ * @module ToggleSwitch
+ * @desc A reusable toggle component for switching between two options.
+ *
+ * @features
+ * - Supports two configurable options via props
+ * - Highlights selected option with active styles
+ * - Accepts custom className for flexible layout
+ * - Fully accessible with focus styles
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { type JSX } from 'react'
 
 interface ToggleSwitchProps {

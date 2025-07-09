@@ -1,7 +1,20 @@
+/**
+ * @file global.css
+ * @module globalStyles
+ * @desc Global styles, theme variables, utility classes, and custom animations for the Fruit Jar App.
+ *
+ * @features
+ * - Tailwind CSS base import and dark mode variant
+ * - Theme variables for colors and fonts using `@theme`
+ * - Custom keyframe animation for loading dots
+ * - Utility button classes (green, teal, blue, red)
+ * - Global font and scrollbar styling
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 @import "tailwindcss";
-
-
-
 
 /* Dark mode variant setup */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -29,13 +42,10 @@ html, body {
   height: 100%;
 }
 
-
-
 /* Hide scrollbars (optional) */
 body::-webkit-scrollbar {
   display: none;
 }
-
 
 /* Loading Dots */
 @keyframes loadingDots {
@@ -51,7 +61,7 @@ body::-webkit-scrollbar {
   white-space: pre; /* ensures spacing is preserved */
 }
 
-
+/* Buttons */
 .btn{
   @apply bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 hover:cursor-pointer;
 }

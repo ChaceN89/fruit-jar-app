@@ -1,9 +1,25 @@
+/**
+ * @file FruitTable.tsx
+ * @module FruitTable
+ * @desc Tabular view of sorted fruit groups with expand/collapse functionality and group add-to-jar support.
+ *
+ * @features
+ * - Displays fruits in responsive table format
+ * - Supports group toggle and add-all-to-jar
+ * - Handles horizontal overflow for small screens
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { useFruits } from '@/context/FruitContext'
 import { useEffect, useState } from 'react'
 
-
 export default function FruitTable() {
+  // Get Fruit from gloabl context
   const { sortedFruits, addToJar } = useFruits()
+
+  // State to handle the open groups 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
   // ✅ Pre-fill openGroups when sortedFruits first loads
@@ -61,7 +77,7 @@ export default function FruitTable() {
                 }}
                 className="btn"
               >
-                Add Group to Jar
+                Add All to Jar
               </button>
             </div>
 

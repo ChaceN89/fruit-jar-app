@@ -1,13 +1,32 @@
+/**
+ * @file AllFruit.tsx
+ * @module AllFruit
+ * @desc Main layout component for displaying the fruit list or table, with view toggle and sorting.
+ *
+ * @features
+ * - Displays all fruits using either a list or table view
+ * - Toggle between views via `ToggleSwitch`
+ * - Integrates sorting controls and loading/error handling
+ * - Scrollable content area with responsive layout
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { useState } from 'react'
 import { useFruits } from '@/context/FruitContext'
 import ToggleSwitch from '../ui-elements/ToggleSwitch'
 
+// Left side components
 import FruitSorting from './FruitSorting'
 import FruitList from './FruitList'
 import FruitTable from './FruitTable'
 
 export default function AllFruit() {
+  // Get fruits data and loading state from context
   const { fruits, loading, error } = useFruits()
+
+  // Local state for view mode - list or table
   const [viewMode, setViewMode] = useState<'List' | 'Table'>('List')
 
   return (

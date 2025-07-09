@@ -1,3 +1,18 @@
+/**
+ * @file FruitDisplay.tsx
+ * @module FruitDisplay
+ * @desc Layout component for displaying the user's selected fruits in either a jar or pie chart view.
+ *
+ * @features
+ * - Toggle between FruitJar and FruitPieChart views
+ * - Shows total fruits and calories
+ * - Allows clearing the jar
+ * - Displays selected fruit details responsively
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { useState } from 'react'
 import ToggleSwitch from '../ui-elements/ToggleSwitch'
 import { useFruits } from '@/context/FruitContext'

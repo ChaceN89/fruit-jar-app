@@ -1,4 +1,17 @@
-
+/**
+ * @file SplashScreen.tsx
+ * @module SplashScreen
+ * @desc Full-screen splash screen with animated transition for app loading state.
+ *
+ * @features
+ * - Full viewport splash with branding and loading text
+ * - Optional fade and scale-out animation via `transitionOut` prop
+ * - Gradient background and centered logo
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 interface SplashScreenProps {
   transitionOut?: boolean
 }

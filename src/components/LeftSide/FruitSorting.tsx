@@ -1,10 +1,28 @@
+/**
+ * @file FruitSorting.tsx
+ * @module FruitSorting
+ * @desc UI component for selecting a grouping option to sort fruits in the Fruit Jar App.
+ *
+ * @features
+ * - Allows grouping fruits by family, order, or genus
+ * - Supports "None" to show ungrouped list
+ * - Displays optional fruit count
+ * - Updates sorting option via context
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { useFruits } from '@/context/FruitContext'
 
+// Props
 type FruitSortingProps = {
   numOfFruits?: number
 }
 
 export default function FruitSorting({ numOfFruits }: FruitSortingProps) {
+
+  // Context for fruits data  sorting options
   const { sortOption, setSortOption } = useFruits()
 
   return (

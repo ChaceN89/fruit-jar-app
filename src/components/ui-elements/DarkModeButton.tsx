@@ -12,8 +12,8 @@
  * <DarkModeButton />
  *
  * @author Chace Nielson
- * @created Jul 4, 2025
- * @updated Jul 4, 2025
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
  */
 
 import { useEffect, useState, type JSX } from 'react'

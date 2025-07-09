@@ -1,69 +1,99 @@
-# React + TypeScript + Vite
+# 🥭 Fruit Jar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A playful React + TypeScript app that lets users browse, group, and collect virtual fruits into a "fruit jar" for nutritional breakdown and visualization.
 
-Currently, two official plugins are available:
+> Designed as a take-home project to demonstrate frontend skills using real-world UI logic, state management, and data visualization techniques.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📦 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🍇 **Fruit Fetching** — Retrieves fruit data from a JSON file (originally meant to be fetched via CORS-protected API).
+- 🧮 **Group By Control** — Users can group fruits by `Family`, `Order`, or `Genus`, or view them ungrouped.
+- 📋 **Dual View Modes** — Toggle between **List** and **Table** view for fruit browsing.
+- 🫙 **Jar Collection** — Add fruits (individually or entire groups) to your personal fruit jar.
+- 📊 **Pie Chart Visualization** — Switch to a pie chart view to analyze calorie distribution in the jar.
+- 🧠 **Detailed Inspection** — Hover any fruit in the jar to view its full nutrition breakdown.
+- ♻️ **Expandable Sections** — Expand/collapse grouped fruit sections for clarity.
+- ✨ **Animated Splash Screen** — Hides app loading and improves first load UX.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🚀 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- ⚛️ React (w/ TypeScript)
+- 🎨 Tailwind CSS
+- 📈 Recharts
+- 🌍 React Context API
+- ☁️ Vercel (for deployment)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🗂️ File Structure Highlights
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `src/context/FruitContext.tsx` — global state management for fruits, jar, and sorting
+- `src/components/AllFruit.tsx` — handles the grouped/tabled UI views
+- `src/components/FruitJar.tsx` — renders the visual fruit jar
+- `src/components/FruitPieChart.tsx` — renders calorie distribution as a pie chart
+- `src/components/SelectedFruit.tsx` — shows detailed nutrition on hover
+- `src/data/fruit-data.json` — local fallback fruit data
+- `src/data/fruit-icons-list.ts` — icon name mappings for fruit images
+
+---
+
+## ⚙️ Implementation Details
+
+### ❗ CORS & API Access
+
+The original API at `https://fruity-proxy.vercel.app/` is protected via CORS to simulate real-world API access limitations. Although a proxy or server middleware could've been used, I opted to **download the JSON once** and store it locally in `public/fruit-data.json` to focus on feature development.
+
+### 🌐 State Management
+
+All fruit-related state (including fetched data, group sorting, selected fruit, and the jar contents) is stored in a global **React Context**, enabling seamless access across components and reducing prop drilling.
+
+### 🔍 Browsing Experience
+
+- **Group By** allows viewing flat or grouped lists by shared family/order/genus.
+- Both **List** and **Table** views are available, switchable via toggle.
+- **Add buttons** are available for each fruit and each group.
+
+### 🍽️ Jar Experience
+
+- Added fruits are visualized as icons within a stylized container.
+- Fruit hover displays a nutritional info card.
+- Optional **pie chart view** available with calorie distribution.
+- Total calorie count is always visible.
+- A single **Empty Jar** button clears all added fruits.
+
+---
+
+## 🧪 Testing Notes
+
+- The app includes error and loading states during data fetching.
+- Responsive design tested on desktop and mobile views.
+- Scrollbars are hidden where appropriate to preserve aesthetic but overflow remains usable.
+
+---
+
+## 📤 Deployment
+
+Deployed live via **Vercel**  
+🔗 [Live Demo](#)  
+📁 [GitHub Repo](#)
+
+---
+
+## 🧠 Evaluation Notes
+
+- Built with modular, typed React components
+- Data fetching errors handled gracefully
+- Dark mode support and smooth transitions included
+- Grouping, collapsing, sorting, and dual-views all implemented cleanly
+
+---
+
+## 👋 Closing Notes
+
+Thank you for reviewing this project. I hope it demonstrates both thoughtful frontend architecture and attention to usability details. I’m excited to chat more!
+
+– Chace Nielson

@@ -1,3 +1,18 @@
+/**
+ * @file SelectedFruit.tsx
+ * @module SelectedFruit
+ * @desc Displays detailed information about the currently selected fruit in the Fruit Jar App.
+ *
+ * @features
+ * - Shows fruit name, image, and full nutrition info
+ * - Updates based on hover events
+ * - Responsive layout for different screen sizes
+ * - Fallback message when no fruit is selected
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
 import { useFruits } from '@/context/FruitContext'
 import { getFruitIconPath } from '@/utils/utils'
 

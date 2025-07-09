@@ -5,8 +5,8 @@
  * with the DarkModeButton on the right.
  *
  * @author Chace Nielson
- * @created Jul 4, 2025
- * @updated Jul 4, 2025
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
  */
 
 import { type JSX } from 'react'

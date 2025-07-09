@@ -1,10 +1,25 @@
+/**
+ * @file FruitJar.tsx
+ * @module FruitJar
+ * @desc Visual component that displays fruits added to the user's jar. Supports hover, overflow scroll, and dynamic growth.
+ *
+ * @features
+ * - Shows fruit icons with tooltips and calorie data
+ * - Scrolls when contents exceed vertical limit
+ * - Triggers selected fruit on hover
+ *
+ * @author Chace Nielson
+ * @created Jul 8, 2025
+ * @updated Jul 8, 2025
+ */
+
 import { useFruits } from '@/context/FruitContext'
 import { getFruitIconPath } from '@/utils/utils'
 import Tooltip from '../ui-elements/Tooltip'
 
 export default function FruitJar() {
+  // Get data for the context state machine
   const { jarFruits, setSelectedFruit } = useFruits()
-
 
   return (
     <div className="mt-6 relative w-full h-auto border-8 border-black dark:border-white rounded-[30px] bg-gray-100 dark:bg-gray-300 shadow-sm dark:shadow-white transition-all duration-300 overflow-hidden">
@@ -18,7 +33,7 @@ export default function FruitJar() {
                 text={`${fruit.name} (${fruit.nutritions.calories} cal)`}
                 openDuration={200}
               >
-                <img
+                <img // the img of the fruit is displayed in the jar 
                   onMouseEnter={() => setSelectedFruit(fruit)}
                   src={iconPath}
                   alt={fruit.name}
