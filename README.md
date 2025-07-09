@@ -33,9 +33,9 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 ## 🗂️ File Structure Highlights
 
 - `src/context/FruitContext.tsx` — global state management for fruits, jar, and sorting
-- `src/components/leftSide/AllFruit.tsx` — handles the grouped/tabled UI views
-- `src/components/rigthSide/FruitJar.tsx` — renders the visual fruit jar
-- `src/components/rigthSide/FruitPieChart.tsx` — renders calorie distribution as a pie chart
+- `src/components/leftSideComponents/AllFruit.tsx` — handles the grouped/tabled UI views
+- `src/components/rightSideComponents/FruitJar.tsx` — renders the visual fruit jar
+- `src/components/rightSideComponents/FruitPieChart.tsx` — renders calorie distribution as a pie chart
 - `src/data/fruit-data.json` — local fallback fruit data
 
 ---

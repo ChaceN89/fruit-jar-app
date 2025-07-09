@@ -13,8 +13,8 @@
  * @updated Jul 8, 2025
  */
 import Header from './components/ui-elements/Header'
-import FruitList from './components/leftSide/AllFruit'
-import FruitDisplay from './components/rightSide/FruitDisplay'
+import FruitList from './components/leftSideComponents/AllFruit'
+import FruitDisplay from './components/rightSideComponents/FruitDisplay'
 
 export default function App() {
   return (
