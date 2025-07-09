@@ -1,7 +1,3 @@
-https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits - proxy server
-
-
-
 # 🥭 Fruit Jar App
 
 A playful React + TypeScript app that lets users browse, group, and collect virtual fruits into a "fruit jar" for nutritional breakdown and visualization.
@@ -10,9 +6,20 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 
 ---
 
+## 🔗 Links
+
+- 🧾 [GitHub Repo — Main App](https://github.com/ChaceN89/fruit-jar-app)
+- 🧩 [GitHub Repo — Proxy Server](https://github.com/ChaceN89/fruit-jar-app-proxy-server)
+- 🖥️ [Live App (Vercel)](https://fruit-jar-app-eight.vercel.app)
+- 📦 [Live App (S3)](http://fruit-jar-app.s3-website-us-east-1.amazonaws.com/)
+- 🔁 [Proxy server](https://myvwdd4mpq.us-east-1.awsapprunner.com)
+- 🔁 [Proxy endpoint](https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits)
+
+---
+
 ## 📦 Features
 
-- 🍇 **Fruit Fetching** — Retrieves fruit data from a JSON file (originally meant to be fetched via CORS-protected API).
+- 🍇 **Fruit Fetching** — Retrieves fruit data through a CORS-friendly proxy hosted on AWS App Runner.
 - 🧮 **Group By Control** — Users can group fruits by `Family`, `Order`, or `Genus`, or view them ungrouped.
 - 📋 **Dual View Modes** — Toggle between **List** and **Table** view for fruit browsing.
 - 🫙 **Jar Collection** — Add fruits (individually or entire groups) to your personal fruit jar.
@@ -20,7 +27,8 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 - 🧠 **Detailed Inspection** — Hover any fruit in the jar to view its full nutrition breakdown.
 - ♻️ **Expandable Sections** — Expand/collapse grouped fruit sections for clarity.
 - ✨ **Animated Splash Screen** — Hides app loading and improves first load UX.
-- 📱 **Responsive Layout** — Fully responsive layout with adaptive flex panels for mobile and desktop.
+- 📱 **Responsive Layout** — Fully mobile and desktop friendly.
+- 🌒 **Dark Mode Support** — Seamless light/dark mode integration.
 
 ---
 
@@ -30,63 +38,81 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 - 🎨 Tailwind CSS
 - 📈 Recharts
 - 🌍 React Context API
-- ☁️ Vercel (for deployment)
+- ☁️ AWS S3 (static hosting)
+- 🧭 AWS App Runner (proxy server)
 
 ---
 
-## 🗂️ File Structure Highlights
+## 🌐 Proxy API Setup
 
-- `src/context/FruitContext.tsx` — global state management for fruits, jar, and sorting
-- `src/components/leftSideComponents/AllFruit.tsx` — handles the grouped/tabled UI views
-- `src/components/rightSideComponents/FruitJar.tsx` — renders the visual fruit jar
-- `src/components/rightSideComponents/FruitPieChart.tsx` — renders calorie distribution as a pie chart
-- `src/data/fruit-data.json` — local fallback fruit data
+The original fruit API is protected by strict CORS headers and only allows `localhost:5173`. To solve this, I created a custom **proxy server** hosted with **AWS App Runner**.
 
----
+- 🔄 **Proxy Base URL**: [`https://myvwdd4mpq.us-east-1.awsapprunner.com`](https://myvwdd4mpq.us-east-1.awsapprunner.com)
+- 🍎 **API Endpoint**: [`https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits`](https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits)
+- 📁 **Proxy Source Repo**: [fruit-jar-app-proxy-server](https://github.com/ChaceN89/fruit-jar-app-proxy-server)
 
-## ⚙️ Implementation Details
+To use this in the main app:
 
-### ❗ CORS & API Access
-
-The original API at `https://fruity-proxy.vercel.app/` is protected via CORS to simulate real-world API access limitations. Although a proxy or server middleware could've been used, I opted to **download the JSON once** and store it locally in `public/fruit-data.json` to focus on feature development.
-
-### 🌐 State Management
-
-All fruit-related state (including fetched data, group sorting, selected fruit, and the jar contents) is stored in a global **React Context**, enabling seamless access across components and reducing prop drilling.
-
-### 🔍 Sorting
-
-- **Group By** allows viewing flat or grouped lists by shared family/order/genus.
-- Both **List** and **Table** views are available, switchable via toggle.
-- **Add buttons** are available for each fruit and each group.
-
-### 🍽️ Jar of Fruit
-
-- Added fruits are visualized as icons within a stylized container.
-- Fruit hover displays a nutritional info card.
-- Optional **pie chart view** available with calorie distribution.
-- Total calorie count is always visible.
-- A single **Empty Jar** button clears all added fruits.
-
----
-
-## 🧪 Other Notes
-
-- The app includes error and loading states during data fetching.
-- Responsive design tested on desktop and mobile views.
-- Scrollbars are hidden where appropriate to preserve aesthetic but overflow remains usable.
-- Dark mode support
- 
+```env
+# .env.production
+VITE_API_PATH=https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits
+```
 
 ---
 
 ## 📤 Deployment
 
-Deployed live via **Vercel**  
-🔗 [Live Demo](https://fruit-jar-app-eight.vercel.app/)  
-📁 [GitHub Repo](https://github.com/ChaceN89/fruit-jar-app)
+### 🔗 Live URLs
+
+- 🧪 **Vercel Deployment**: [https://fruit-jar-app-eight.vercel.app](https://fruit-jar-app-eight.vercel.app)
+- ☁️ **AWS S3 Static Hosting**: [http://fruit-jar-app.s3-website-us-east-1.amazonaws.com](http://fruit-jar-app.s3-website-us-east-1.amazonaws.com)
+- 🧭 **Proxy API (App Runner)**: [https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits](https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits)
+
+### 🛠️ Required Environment Variable
+
+Make sure to include the following variable in `.env.production` before running `vite build`:
+
+```env
+VITE_API_PATH=https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits
+```
 
 ---
 
+## 📁 Deploying to S3
+
+To deploy a new build to an S3 bucket, use the included `Makefile` workflow.
+
+### 🧾 Required Variables in `.env.deploy`
+
+```env
+AWS_S3_BUCKET_NAME=...
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_REGION=us-east-1
+```
+
+### 🧱 Build & Upload
+
+```bash
+make deploy      # Builds and uploads to S3
+```
+
+> Your S3 bucket must have **static website hosting enabled** and a **public read policy**.
+
+---
+
+## 📂 File Structure Highlights
+
+- `src/context/FruitContext.tsx` — Global state management
+- `src/components/leftSideComponents/AllFruit.tsx` — Grouping, sorting, and UI logic
+- `src/components/rightSideComponents/FruitJar.tsx` — Visual representation of the user's fruit jar
+- `src/components/rightSideComponents/FruitPieChart.tsx` — Pie chart of calorie distribution
+- `src/data/fruit-data.json` — Local fallback (not used in production)
+
+---
+
+## 👨‍💻 Author
+
 **Chace Nielson**  
-[Portfolio → chacenielson.com](https://chacenielson.com)
+🔗 [chacenielson.com](https://chacenielson.com)
+

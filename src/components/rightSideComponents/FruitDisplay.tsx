@@ -24,7 +24,11 @@ export default function FruitDisplay() {
   const [view, setView] = useState<'Jar' | 'Pie'>('Jar')
   const { emptyJar, jarFruits } = useFruits()
 
-  const totalCalories = jarFruits.reduce((sum, f) => sum + f.nutritions.calories, 0)
+  const totalCalories = Number(jarFruits.reduce((sum, f) => sum + f.nutritions.calories, 0).toFixed(1))
+  const totalFat = Number(jarFruits.reduce((sum, f) => sum + f.nutritions.fat, 0).toFixed(1))
+  const totalSugar = Number(jarFruits.reduce((sum, f) => sum + f.nutritions.sugar, 0).toFixed(1))
+  const totalCarbs = Number(jarFruits.reduce((sum, f) => sum + f.nutritions.carbohydrates, 0).toFixed(1))
+  const totalProtein = Number(jarFruits.reduce((sum, f) => sum + f.nutritions.protein, 0).toFixed(1))
 
   return (
     <div className="p-4 w-full overflow-y-auto">
@@ -44,7 +48,7 @@ export default function FruitDisplay() {
       <div className="mb-2">
         <h3 className="font-semibold dark:text-white">Your Fruit Jar: {jarFruits.length } Fruit{jarFruits.length !== 1 ? 's' : ''}</h3>
         <h3 className="font-semibold text-gray-500 dark:text-gray-300">
-          Total Calories: {totalCalories}
+          Total Calories: {totalCalories} | Fat: {totalFat}g | Sugar: {totalSugar}g | Carbs: {totalCarbs}g | Protein: {totalProtein}
         </h3>
       </div>
 
