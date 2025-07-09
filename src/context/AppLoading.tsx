@@ -27,7 +27,7 @@ export default function AppLoading() {
   useEffect(() => {
     if (!loading) {
       // add a small buffer before fade out
-      setTimeout(() => setRemoveSplash(true), 500)
+      setTimeout(() => setRemoveSplash(true), 1000)
       setTimeout(() => {
         setShowSplash(false)
       }, 1500) // 1s fade animation

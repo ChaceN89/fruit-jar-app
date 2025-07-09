@@ -78,8 +78,8 @@ All fruit-related state (including fetched data, group sorting, selected fruit, 
 ## 📤 Deployment
 
 Deployed live via **Vercel**  
-🔗 [Live Demo](#)  
-📁 [GitHub Repo](#)
+🔗 [Live Demo](https://fruit-jar-app-eight.vercel.app/)  
+📁 [GitHub Repo](https://github.com/ChaceN89/fruit-jar-app)
 
 ---
 
