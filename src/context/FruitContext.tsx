@@ -115,15 +115,10 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
     try {
 
       // Fetch the fruit data from the API using the provided URL and API key
-      // const response = await fetch("https://fruity-proxy.vercel.app/api/fruits", {
-      //   headers: {
-      //     'x-api-key': "fruit-api-challenge-2025",
-      //   }
-      // })
+      const response = await fetch(import.meta.env.VITE_API_PATH)
 
-      // Downloaded file
-      const response = await fetch("/fruit-data.json")
-
+      // Downloaded file from public
+      // const response = await fetch("/fruit-data.json")
 
       // Check if the response is ok
       if (!response.ok) throw new Error(`Error: ${response.status}`)
@@ -142,7 +137,6 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false)
     }
   }
-
 
   // Function to add a fruit to the jar
   const addToJar = (fruit: Fruit) => {
@@ -163,7 +157,6 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
   const emptyJar = () => {
     setJarFruits([])
   }
-
 
 
   return (

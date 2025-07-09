@@ -1,3 +1,7 @@
+https://myvwdd4mpq.us-east-1.awsapprunner.com/api/fruits - proxy server
+
+
+
 # 🥭 Fruit Jar App
 
 A playful React + TypeScript app that lets users browse, group, and collect virtual fruits into a "fruit jar" for nutritional breakdown and visualization.
