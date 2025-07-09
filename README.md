@@ -16,6 +16,7 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 - 🧠 **Detailed Inspection** — Hover any fruit in the jar to view its full nutrition breakdown.
 - ♻️ **Expandable Sections** — Expand/collapse grouped fruit sections for clarity.
 - ✨ **Animated Splash Screen** — Hides app loading and improves first load UX.
+- 📱 **Responsive Layout** — Fully responsive layout with adaptive flex panels for mobile and desktop.
 
 ---
 
@@ -32,12 +33,10 @@ A playful React + TypeScript app that lets users browse, group, and collect virt
 ## 🗂️ File Structure Highlights
 
 - `src/context/FruitContext.tsx` — global state management for fruits, jar, and sorting
-- `src/components/AllFruit.tsx` — handles the grouped/tabled UI views
-- `src/components/FruitJar.tsx` — renders the visual fruit jar
-- `src/components/FruitPieChart.tsx` — renders calorie distribution as a pie chart
-- `src/components/SelectedFruit.tsx` — shows detailed nutrition on hover
+- `src/components/leftSide/AllFruit.tsx` — handles the grouped/tabled UI views
+- `src/components/rigthSide/FruitJar.tsx` — renders the visual fruit jar
+- `src/components/rigthSide/FruitPieChart.tsx` — renders calorie distribution as a pie chart
 - `src/data/fruit-data.json` — local fallback fruit data
-- `src/data/fruit-icons-list.ts` — icon name mappings for fruit images
 
 ---
 
@@ -51,13 +50,13 @@ The original API at `https://fruity-proxy.vercel.app/` is protected via CORS to 
 
 All fruit-related state (including fetched data, group sorting, selected fruit, and the jar contents) is stored in a global **React Context**, enabling seamless access across components and reducing prop drilling.
 
-### 🔍 Browsing Experience
+### 🔍 Sorting
 
 - **Group By** allows viewing flat or grouped lists by shared family/order/genus.
 - Both **List** and **Table** views are available, switchable via toggle.
 - **Add buttons** are available for each fruit and each group.
 
-### 🍽️ Jar Experience
+### 🍽️ Jar of Fruit
 
 - Added fruits are visualized as icons within a stylized container.
 - Fruit hover displays a nutritional info card.
@@ -67,11 +66,13 @@ All fruit-related state (including fetched data, group sorting, selected fruit, 
 
 ---
 
-## 🧪 Testing Notes
+## 🧪 Other Notes
 
 - The app includes error and loading states during data fetching.
 - Responsive design tested on desktop and mobile views.
 - Scrollbars are hidden where appropriate to preserve aesthetic but overflow remains usable.
+- Dark mode support
+ 
 
 ---
 
@@ -83,17 +84,5 @@ Deployed live via **Vercel**
 
 ---
 
-## 🧠 Evaluation Notes
-
-- Built with modular, typed React components
-- Data fetching errors handled gracefully
-- Dark mode support and smooth transitions included
-- Grouping, collapsing, sorting, and dual-views all implemented cleanly
-
----
-
-## 👋 Closing Notes
-
-Thank you for reviewing this project. I hope it demonstrates both thoughtful frontend architecture and attention to usability details. I’m excited to chat more!
-
-– Chace Nielson
+**Chace Nielson**  
+[Portfolio → chacenielson.com](https://chacenielson.com)
