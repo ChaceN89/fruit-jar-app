@@ -51,8 +51,7 @@ export default function DarkModeButton(): JSX.Element {
           hover:bg-secondary/50 dark:hover:bg-primary/50
           transition-colors
         `}
-        title="Toggle Dark Mode"
-        aria-label="Toggle Dark Mode"
+
       >
         {isDarkMode ? <FaMoon /> : <FaSun />}
       </button>
