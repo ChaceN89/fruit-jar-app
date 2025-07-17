@@ -15,7 +15,7 @@
  *
  * @author Chace Nielson
  * @created Jul 28, 2024
- * @updated Jul 8, 2025
+ * @updated Jul 17, 2025
  */
 
 import {
@@ -82,14 +82,27 @@ export default function Tooltip({
     const viewportHeight = window.innerHeight
     const tooltipRect = tooltipRef.current?.getBoundingClientRect() || { width: 0, height: 0 }
 
-    let left = e.clientX + 15
-    let top = e.clientY - 25
+    let left = e.clientX + 10
+    let top = e.clientY - tooltipRect.height - 4 // default: place above the cursor
 
+    // Horizontal overflow (right)
     if (left + tooltipRect.width > viewportWidth) {
       left = e.clientX - tooltipRect.width - 10
     }
+
+    // Horizontal overflow (left)
+    if (left < 0) {
+      left = 10
+    }
+
+    // Vertical overflow (top)
+    if (top < 0) {
+      top = e.clientY + 10 // flip to below cursor
+    }
+
+    // Vertical overflow (bottom)
     if (top + tooltipRect.height > viewportHeight) {
-      top = e.clientY - tooltipRect.height - 10
+      top = viewportHeight - tooltipRect.height - 4
     }
 
     setTooltipStyle({
@@ -98,6 +111,7 @@ export default function Tooltip({
       visibility: showTooltip ? 'visible' : 'hidden',
     })
   }
+
 
   if (isTouchDevice) return <>{children}</>
 
