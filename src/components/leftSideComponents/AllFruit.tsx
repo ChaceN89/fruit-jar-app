@@ -11,7 +11,7 @@
  *
  * @author Chace Nielson
  * @created Jul 8, 2025
- * @updated Jul 8, 2025
+ * @updated Jul 17, 2025
  */
 import { useState } from 'react'
 import { useFruits } from '@/context/FruitContext'
@@ -21,6 +21,7 @@ import ToggleSwitch from '../ui-elements/ToggleSwitch'
 import FruitSorting from './FruitSorting'
 import FruitList from './FruitList'
 import FruitTable from './FruitTable'
+import FruitSearching from './FruitSearching'
 
 export default function AllFruit() {
   // Get fruits data and loading state from context
@@ -43,6 +44,7 @@ export default function AllFruit() {
 
       {/* Sorting Control */}
       <FruitSorting numOfFruits={fruits.length} />
+      <FruitSearching />
 
       {/* Status & Scrollable List/Table */}
       {loading ? (

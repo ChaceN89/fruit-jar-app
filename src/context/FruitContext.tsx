@@ -12,7 +12,7 @@
  *
  * @author Chace Nielson
  * @created Jul 6, 2025
- * @updated Jul 6, 2025
+ * @updated Jul 17, 2025
  */
 // src/context/FruitContext.tsx
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
@@ -52,7 +52,9 @@ interface FruitContextType {
   selectedFruit: Fruit | null
   setSelectedFruit: (fruit: Fruit | null) => void
   loading: boolean
-  error: string | null
+  error: string | null,
+  setSearchTerm: (term: string) => void,
+  searchTerm: string
 }
 
 // Create the context with an initial value of undefined
@@ -71,7 +73,9 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
   const [selectedFruit, setSelectedFruit] = useState<Fruit | null>(null)
   
   // Sorting Options for the main list of fruit - a record of fruits that will be used for sorting
-  const [sortOption, setSortOption] = useState<SortOption>('None')
+  const [sortOption, setSortOption] = useState<SortOption>('None') // default sort option is 'None' to show all fruits other wise grouped by family, order, or genus
+  const [searchTerm, setSearchTerm] = useState<string>('') // search term to search by name
+
   type GroupedFruitMap = Record<string, Fruit[]>
   const [sortedFruits, setSortedFruits] = useState<GroupedFruitMap>({ 'All Fruits': [] })
 
@@ -124,9 +128,14 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
       if (!response.ok) throw new Error(`Error: ${response.status}`)
       const data: Fruit[] = await response.json()
       
+      // Edit the data so key family has trailing and leading spaces removed
+      data.forEach(fruit => {
+        fruit.family = fruit.family.trim()
+      })
 
       // Set the fruits list - all the fruits and the list that will be used for sorting to display a subset of the fruits
       setFruits(data)
+
       setSortedFruits({ 'All Fruits': data })
 
     } catch (err) {
@@ -154,10 +163,28 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
+  // Sets the jar to be empty
   const emptyJar = () => {
     setJarFruits([])
   }
 
+    // UseEffect to filter the sorted fruits based on the search term
+  useEffect(() => {
+    const baseFruits = sortOption === 'None' ? { 'All Fruits': fruits } : groupFruitsBy(fruits, sortOption)
+
+    if (searchTerm.trim() === '') {
+      setSortedFruits(baseFruits)
+    } else {
+      const filtered = Object.entries(baseFruits).reduce((acc, [key, fruits]) => {
+        const matched = fruits.filter(fruit =>
+          fruit.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        if (matched.length > 0) acc[key] = matched
+        return acc
+      }, {} as GroupedFruitMap)
+      setSortedFruits(filtered)
+    }
+  }, [searchTerm, fruits, sortOption])
 
   return (
     <FruitContext.Provider
@@ -174,6 +201,8 @@ export const FruitProvider = ({ children }: { children: ReactNode }) => {
         setSelectedFruit,
         loading,
         error,
+        setSearchTerm,
+        searchTerm
       }}
     >
       {children}
